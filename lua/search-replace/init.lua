@@ -39,6 +39,24 @@ local function setup_commands_multi_buffer()
 	cmd("SearchReplaceMultiBufferVisualSelection", multi_buffer.visual_charwise_selection, { range = true })
 end
 
+local function setup_commands_quick_fix()
+	local quick_fix = require("search-replace.quickfix-buffer")
+
+	cmd("SearchReplaceQuickFixSelections", ui.quick_fix_selections, {})
+
+	cmd("SearchReplaceQuickFixOpen", quick_fix.open, {})
+	cmd("SearchReplaceQuickFixCWord", quick_fix.cword, {})
+	cmd("SearchReplaceQuickFixCWORD", quick_fix.cWORD, {})
+	cmd("SearchReplaceQuickFixCExpr", quick_fix.cexpr, {})
+	cmd("SearchReplaceQuickFixCFile", quick_fix.cfile, {})
+
+	-- NOTE:
+	-- visual selection search/replace - only available via a key binding/direct
+	-- call since it's not possible to use leader key bindings in visual mode
+	cmd("SearchReplaceQuickFixVisualSelection", quick_fix.visual_charwise_selection, { range = true })
+end
+
+
 local function setup_commands_visual_selections()
 	local visual_multitype = require("search-replace.visual-multitype")
 
@@ -61,6 +79,7 @@ M.setup = function(options)
 
 	setup_commands_single_buffer()
 	setup_commands_multi_buffer()
+  setup_commands_quick_fix()
 	setup_commands_visual_selections()
 end
 
