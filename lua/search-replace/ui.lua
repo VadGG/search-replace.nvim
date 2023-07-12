@@ -13,6 +13,8 @@ local function set_keymap(mode, cword, cexpr, cfile, cWORD)
 		search_replace_function = "require('search-replace.single-buffer').search_replace"
 	elseif mode == "multi" then
 		search_replace_function = "require('search-replace.multi-buffer').search_replace"
+	elseif mode == "quickfix" then
+		search_replace_function = "require('search-replace.quickfix-buffer').search_replace"
 	end
 
 	-- FIXME:
@@ -112,5 +114,10 @@ end
 M.multi_buffer_selections = function()
 	selections("multi")
 end
+
+M.quick_fix_selections = function()
+	selections("quickfix")
+end
+
 
 return M
